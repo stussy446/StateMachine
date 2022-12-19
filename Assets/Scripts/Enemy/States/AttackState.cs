@@ -12,6 +12,18 @@ public class AttackState : IEnemyState
             mat.color = Color.red;
         }
 
-        return this;
+        // changes states based on the enemies health and if the player is visible
+        if (!enemy.PlayerVisible && enemy.CurrentHealth >= 5f)
+        {
+            return enemy.patrolState;
+        }
+        else if (enemy.CurrentHealth < 5f)
+        {
+            return enemy.fleeState;
+        }
+        else
+        {
+            return this;
+        }
     }
 }
